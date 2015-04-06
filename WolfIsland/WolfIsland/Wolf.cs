@@ -14,15 +14,10 @@ namespace WolfIsland
 			
 		}
 
-		public void WolfDeath()
-		{
-
-		}
-
 		public void ReduceHealth()
 		{
 			if (this.health == 0)
-				WolfDeath();
+				KillAnimal();
 			else
 				this.health--;
 		}

@@ -8,6 +8,9 @@ namespace WolfIsland
 {
 	class Rabbit : Animal
 	{
-		public int chance = 5;
+		public Rabbit()
+		{
+			base.chance = 5;
+		}
 	}
 }

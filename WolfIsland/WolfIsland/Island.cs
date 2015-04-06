@@ -11,7 +11,7 @@ namespace WolfIsland
 		public static int height = 20;
 		public static int width = 20;
 
-		private int[,] IslArray = new int[height,width];
+		private int[,] FieldArray = new int[height,width];
 
 		public void PutAnimal()
 		{
@@ -33,9 +33,20 @@ namespace WolfIsland
 
 		}
 
-		public void FillIsland()
+		public void FillField(int r, int w)
 		{
+			Random rand = new Random();
+			while(r>0)
+			{
+				int a = rand.Next(height);
+				int b = rand.Next(width);
+				//if (FieldArray[a,b] == 0)
+					//List
+			}
+			while (w>0)
+			{
 
+			}
 		}
 	}
 }

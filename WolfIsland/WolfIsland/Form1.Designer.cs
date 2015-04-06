@@ -37,12 +37,12 @@
 			this.label4 = new System.Windows.Forms.Label();
 			this.rPut = new System.Windows.Forms.RadioButton();
 			this.wPut = new System.Windows.Forms.RadioButton();
-			this.Island = new System.Windows.Forms.Panel();
+			this.Field = new System.Windows.Forms.Panel();
 			this.LogTBox = new System.Windows.Forms.RichTextBox();
 			this.Start_Button = new System.Windows.Forms.Button();
 			this.Pause_Button = new System.Windows.Forms.Button();
-			this.wCount_Label = new System.Windows.Forms.Label();
-			this.rCount_Label = new System.Windows.Forms.Label();
+			this.wAlive = new System.Windows.Forms.Label();
+			this.rAlive = new System.Windows.Forms.Label();
 			this.Step_Label = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.rNum)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.wNum)).BeginInit();
@@ -83,6 +83,11 @@
 			this.rNum.ReadOnly = true;
 			this.rNum.Size = new System.Drawing.Size(51, 20);
 			this.rNum.TabIndex = 3;
+			this.rNum.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
 			// 
 			// wNum
 			// 
@@ -91,6 +96,11 @@
 			this.wNum.ReadOnly = true;
 			this.wNum.Size = new System.Drawing.Size(51, 20);
 			this.wNum.TabIndex = 4;
+			this.wNum.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
 			// 
 			// StepDuration
 			// 
@@ -147,17 +157,16 @@
 			this.wPut.Name = "wPut";
 			this.wPut.Size = new System.Drawing.Size(56, 17);
 			this.wPut.TabIndex = 8;
-			this.wPut.TabStop = true;
 			this.wPut.Text = "Волка";
 			this.wPut.UseVisualStyleBackColor = true;
 			// 
-			// Island
+			// Field
 			// 
-			this.Island.BackColor = System.Drawing.Color.White;
-			this.Island.Location = new System.Drawing.Point(182, 12);
-			this.Island.Name = "Island";
-			this.Island.Size = new System.Drawing.Size(400, 400);
-			this.Island.TabIndex = 9;
+			this.Field.BackColor = System.Drawing.Color.White;
+			this.Field.Location = new System.Drawing.Point(182, 12);
+			this.Field.Name = "Field";
+			this.Field.Size = new System.Drawing.Size(400, 400);
+			this.Field.TabIndex = 9;
 			// 
 			// LogTBox
 			// 
@@ -190,23 +199,23 @@
 			this.Pause_Button.UseVisualStyleBackColor = true;
 			this.Pause_Button.Click += new System.EventHandler(this.Pause_Button_Click);
 			// 
-			// wCount_Label
+			// wAlive
 			// 
-			this.wCount_Label.AutoSize = true;
-			this.wCount_Label.Location = new System.Drawing.Point(12, 329);
-			this.wCount_Label.Name = "wCount_Label";
-			this.wCount_Label.Size = new System.Drawing.Size(108, 13);
-			this.wCount_Label.TabIndex = 13;
-			this.wCount_Label.Text = "Количество волков:";
+			this.wAlive.AutoSize = true;
+			this.wAlive.Location = new System.Drawing.Point(12, 329);
+			this.wAlive.Name = "wAlive";
+			this.wAlive.Size = new System.Drawing.Size(108, 13);
+			this.wAlive.TabIndex = 13;
+			this.wAlive.Text = "Количество волков:";
 			// 
-			// rCount_Label
+			// rAlive
 			// 
-			this.rCount_Label.AutoSize = true;
-			this.rCount_Label.Location = new System.Drawing.Point(12, 307);
-			this.rCount_Label.Name = "rCount_Label";
-			this.rCount_Label.Size = new System.Drawing.Size(120, 13);
-			this.rCount_Label.TabIndex = 14;
-			this.rCount_Label.Text = "Количество кроликов:";
+			this.rAlive.AutoSize = true;
+			this.rAlive.Location = new System.Drawing.Point(12, 307);
+			this.rAlive.Name = "rAlive";
+			this.rAlive.Size = new System.Drawing.Size(120, 13);
+			this.rAlive.TabIndex = 14;
+			this.rAlive.Text = "Количество кроликов:";
 			// 
 			// Step_Label
 			// 
@@ -223,12 +232,12 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(814, 421);
 			this.Controls.Add(this.Step_Label);
-			this.Controls.Add(this.rCount_Label);
-			this.Controls.Add(this.wCount_Label);
+			this.Controls.Add(this.rAlive);
+			this.Controls.Add(this.wAlive);
 			this.Controls.Add(this.Pause_Button);
 			this.Controls.Add(this.Start_Button);
 			this.Controls.Add(this.LogTBox);
-			this.Controls.Add(this.Island);
+			this.Controls.Add(this.Field);
 			this.Controls.Add(this.wPut);
 			this.Controls.Add(this.rPut);
 			this.Controls.Add(this.label4);
@@ -259,12 +268,12 @@
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.RadioButton rPut;
 		private System.Windows.Forms.RadioButton wPut;
-		private System.Windows.Forms.Panel Island;
+		private System.Windows.Forms.Panel Field;
 		private System.Windows.Forms.RichTextBox LogTBox;
 		private System.Windows.Forms.Button Start_Button;
 		private System.Windows.Forms.Button Pause_Button;
-		private System.Windows.Forms.Label wCount_Label;
-		private System.Windows.Forms.Label rCount_Label;
+		private System.Windows.Forms.Label wAlive;
+		private System.Windows.Forms.Label rAlive;
 		private System.Windows.Forms.Label Step_Label;
 	}
 }

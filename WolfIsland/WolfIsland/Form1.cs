@@ -12,6 +12,10 @@ namespace WolfIsland
 {
 	public partial class Form1 : Form
 	{
+		Island island = new Island();
+		List<int[,]> rList;
+		List<int[,]> wList;
+		private int StepNum;
 		public Form1()
 		{
 			InitializeComponent();
@@ -25,7 +29,11 @@ namespace WolfIsland
 
 		private void Start_Button_Click(object sender, EventArgs e)
 		{
+			Pause_Button.Enabled = true;
+			rNum.Enabled = false;
+			wNum.Enabled = false;
 
+			island.FillField((int)rNum.Value, (int)wNum.Value);
 		}
 
 		private void Pause_Button_Click(object sender, EventArgs e)
@@ -33,9 +41,25 @@ namespace WolfIsland
 
 		}
 
-		private void Update()
+		private void UpdateField()
 		{
 
+		}
+
+		private void SetInfText()
+		{
+			if (InvokeRequired)
+			{
+				this.BeginInvoke(new Action<string>((s) => { rAlive.Text = "Количество кроликов: " + rList.Count.ToString(); }));
+				this.BeginInvoke(new Action<string>((s) => { wAlive.Text = "Количество волков: " + wList.Count.ToString(); }));
+				this.BeginInvoke(new Action<string>((s) => { Step_Label.Text = "Времени прошло: " + StepNum.ToString(); }));
+			}
+			else
+			{
+				rAlive.Text = "Количество кроликов: " + rList.Count.ToString();
+				wAlive.Text = "Количество волков: " + wList.Count.ToString();
+				Step_Label.Text = "Времени прошло: " + StepNum.ToString();
+			}
 		}
 	}
 }

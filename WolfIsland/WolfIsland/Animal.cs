@@ -9,7 +9,8 @@ namespace WolfIsland
 	class Animal
 	{
 		public int chance;
-		
+		public int x;
+		public int y;
 
 		public void NewAnimal()
 		{
