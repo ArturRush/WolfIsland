@@ -80,6 +80,7 @@
 			// 
 			this.rNum.Location = new System.Drawing.Point(109, 17);
 			this.rNum.Name = "rNum";
+			this.rNum.ReadOnly = true;
 			this.rNum.Size = new System.Drawing.Size(51, 20);
 			this.rNum.TabIndex = 3;
 			// 
@@ -87,6 +88,7 @@
 			// 
 			this.wNum.Location = new System.Drawing.Point(109, 42);
 			this.wNum.Name = "wNum";
+			this.wNum.ReadOnly = true;
 			this.wNum.Size = new System.Drawing.Size(51, 20);
 			this.wNum.TabIndex = 4;
 			// 
@@ -161,6 +163,7 @@
 			// 
 			this.LogTBox.Location = new System.Drawing.Point(607, 12);
 			this.LogTBox.Name = "LogTBox";
+			this.LogTBox.ReadOnly = true;
 			this.LogTBox.Size = new System.Drawing.Size(195, 400);
 			this.LogTBox.TabIndex = 10;
 			this.LogTBox.Text = "";
@@ -173,6 +176,7 @@
 			this.Start_Button.TabIndex = 11;
 			this.Start_Button.Text = "Старт!";
 			this.Start_Button.UseVisualStyleBackColor = true;
+			this.Start_Button.Click += new System.EventHandler(this.Start_Button_Click);
 			// 
 			// Pause_Button
 			// 
@@ -184,6 +188,7 @@
 			this.Pause_Button.TabIndex = 12;
 			this.Pause_Button.Text = "II";
 			this.Pause_Button.UseVisualStyleBackColor = true;
+			this.Pause_Button.Click += new System.EventHandler(this.Pause_Button_Click);
 			// 
 			// wCount_Label
 			// 

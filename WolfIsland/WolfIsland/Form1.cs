@@ -15,6 +15,27 @@ namespace WolfIsland
 		public Form1()
 		{
 			InitializeComponent();
+			InitGame();
+		}
+
+		private void InitGame()
+		{
+
+		}
+
+		private void Start_Button_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void Pause_Button_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void Update()
+		{
+
 		}
 	}
 }
