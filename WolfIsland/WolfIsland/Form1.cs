@@ -12,9 +12,13 @@ namespace WolfIsland
 {
 	public partial class Form1 : Form
 	{
-		Island island = new Island();
-		List<int[,]> rList;
-		List<int[,]> wList;
+		public List<Rabbit> rList = new List<Rabbit>();
+		public List<Wolf> wList = new List<Wolf>();
+
+		Panel[,] panels = new Panel[Island.height, Island.width];
+
+		Island island;
+
 		private int StepNum;
 		public Form1()
 		{
@@ -24,16 +28,35 @@ namespace WolfIsland
 
 		private void InitGame()
 		{
+			for(int i = 0; i<Island.height; i++)
+				for (int j = 0; j<Island.width; j++)
+				{
+					panels[i, j] = new Panel
+					{
+						Parent = Field,
+						BackColor = Color.White,
+						BorderStyle = BorderStyle.FixedSingle,	
+						Width = Island.width,
+						Height = Island.height,
+						Top = i * Island.height,
+						Left = j * Island.width,
+					};
+					panels[i,j].MouseClick += panel_MouseClick;
+				}
+		}
 
+		void panel_MouseClick(object sender, MouseEventArgs e)
+		{
+			
 		}
 
 		private void Start_Button_Click(object sender, EventArgs e)
 		{
 			Pause_Button.Enabled = true;
+			Start_Button.Text = "Стоп!";
 			rNum.Enabled = false;
 			wNum.Enabled = false;
-
-			island.FillField((int)rNum.Value, (int)wNum.Value);
+			island = new Island((int)rNum.Value, (int)wNum.Value, rList, wList);
 		}
 
 		private void Pause_Button_Click(object sender, EventArgs e)

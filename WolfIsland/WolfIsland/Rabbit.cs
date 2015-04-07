@@ -6,11 +6,18 @@ using System.Threading.Tasks;
 
 namespace WolfIsland
 {
-	class Rabbit : Animal
+	public class Rabbit : Animal
 	{
 		public Rabbit()
 		{
-			base.chance = 5;
+			chance = 5;
+		}
+
+		public Rabbit(int x, int y)
+		{
+			chance = 5;
+			this.x = x;
+			this.y = y;
 		}
 	}
 }

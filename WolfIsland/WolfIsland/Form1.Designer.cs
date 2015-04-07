@@ -163,6 +163,7 @@
 			// Field
 			// 
 			this.Field.BackColor = System.Drawing.Color.White;
+			this.Field.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.Field.Location = new System.Drawing.Point(182, 12);
 			this.Field.Name = "Field";
 			this.Field.Size = new System.Drawing.Size(400, 400);

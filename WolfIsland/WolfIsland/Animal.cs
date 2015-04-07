@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WolfIsland
 {
-	class Animal
+	public class Animal
 	{
 		public int chance;
 		public int x;

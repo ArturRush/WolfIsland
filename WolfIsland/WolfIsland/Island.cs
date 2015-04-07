@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WolfIsland
 {
-	class Island
+	public class Island
 	{
 		public static int height = 20;
 		public static int width = 20;
@@ -33,19 +33,30 @@ namespace WolfIsland
 
 		}
 
-		public void FillField(int r, int w)
+		public Island(int rabbits, int wolfs, List<Rabbit> rList, List<Wolf> wList)
 		{
 			Random rand = new Random();
-			while(r>0)
+			while(rabbits>0)
 			{
-				int a = rand.Next(height);
-				int b = rand.Next(width);
-				//if (FieldArray[a,b] == 0)
-					//List
+				int x = rand.Next(height);
+				int y = rand.Next(width);
+				if (FieldArray[x, y] == 0)
+				{
+					FieldArray[x, y] = 1;
+					rList.Add(new Rabbit(x,y));
+					rabbits--;
+				}
 			}
-			while (w>0)
+			while (wolfs>0)
 			{
-
+				int x = rand.Next(height);
+				int y = rand.Next(width);
+				if (FieldArray[x, y] == 0)
+				{
+					FieldArray[x, y] = 2;
+					wList.Add(new Wolf(x,y));
+					wolfs--;
+				}
 			}
 		}
 	}

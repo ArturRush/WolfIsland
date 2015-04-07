@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WolfIsland
 {
-	class Wolf : Animal
+	public class Wolf : Animal
 	{
 		private int health = 10;
 		public void EatRabbit()
@@ -25,6 +25,13 @@ namespace WolfIsland
 		public Wolf()
 		{
 			chance = 20;
+		}
+		
+		public Wolf(int x, int y)
+		{
+			chance = 20;
+			this.x = x;
+			this.y = y;
 		}
 	}
 }
