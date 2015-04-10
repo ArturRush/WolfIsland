@@ -12,14 +12,14 @@ namespace WolfIsland
 {
 	public partial class Form1 : Form
 	{
-		public List<Rabbit> rList = new List<Rabbit>();
-		public List<Wolf> wList = new List<Wolf>();
+		public static List<Rabbit> rList = new List<Rabbit>();
+		public static List<Wolf> wList = new List<Wolf>();
 
 		Timer upField = new Timer();
 
 		Panel[,] panels = new Panel[Island.height, Island.width];
 
-		Island island;
+		Island island = new Island();
 
 		private int StepNum;
 		private bool action = false;
@@ -70,6 +70,7 @@ namespace WolfIsland
 				int y = (int)(((Panel)sender).Left / Island.width);
 				island.PutWolf(x, y, wList);
 			}
+			UpdatePanels();
 		}
 
 		private void Start_Button_Click(object sender, EventArgs e)
@@ -81,7 +82,7 @@ namespace WolfIsland
 				Start_Button.Text = "Стоп!";
 				rNum.Enabled = false;
 				wNum.Enabled = false;
-				island = new Island((int)rNum.Value, (int)wNum.Value, rList, wList);
+				island.FillIsland((int)rNum.Value, (int)wNum.Value, rList, wList);
 				upField.Start();
 			}else
 			{
@@ -110,7 +111,7 @@ namespace WolfIsland
 		private void UpdateGame()
 		{
 			if (pause)
-			upField.Stop();
+				upField.Stop();
 			SetInfText();
 			UpdatePanels();
 			upField.Interval = (int)StepDuration.Value;
