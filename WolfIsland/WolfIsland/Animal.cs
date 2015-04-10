@@ -12,22 +12,22 @@ namespace WolfIsland
 		public int x;
 		public int y;
 
-		public void NewAnimal()
+		public virtual void NewAnimal()
 		{
 
 		}
 
-		public void KillAnimal()
+		public virtual void KillAnimal()
 		{
 
 		}
 
-		public void BornAnimal()
+		public virtual void BornAnimal()
 		{
 
 		}
 
-		public void NextStep()
+		public virtual void NextStep()
 		{
 
 		}

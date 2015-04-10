@@ -121,6 +121,7 @@
             0,
             0});
 			this.StepDuration.Name = "StepDuration";
+			this.StepDuration.ReadOnly = true;
 			this.StepDuration.Size = new System.Drawing.Size(51, 20);
 			this.StepDuration.TabIndex = 5;
 			this.StepDuration.Value = new decimal(new int[] {

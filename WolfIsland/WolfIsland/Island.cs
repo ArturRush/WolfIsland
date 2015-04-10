@@ -11,11 +11,18 @@ namespace WolfIsland
 		public static int height = 20;
 		public static int width = 20;
 
-		private int[,] FieldArray = new int[height,width];
+		public int[,] FieldArray = new int[height,width];
 
-		public void PutAnimal()
+		public void PutRabbit(int x, int y, List<Rabbit> rList)
 		{
+			FieldArray[x, y] = 1;
+			rList.Add(new Rabbit(x, y));
+		}
 
+		public void PutWolf(int x, int y, List<Wolf> wList)
+		{
+			FieldArray[x, y] = 2;
+			wList.Add(new Wolf(x, y));
 		}
 
 		public void DeleteAnimal()
@@ -33,6 +40,15 @@ namespace WolfIsland
 
 		}
 
+		public void Clear()
+		{
+			for(int i = 0; i<height; i++)
+				for (int j = 0; j<width; j++)
+				{
+					FieldArray[i, j] = 0;
+				}
+		}
+
 		public Island(int rabbits, int wolfs, List<Rabbit> rList, List<Wolf> wList)
 		{
 			Random rand = new Random();
@@ -42,8 +58,7 @@ namespace WolfIsland
 				int y = rand.Next(width);
 				if (FieldArray[x, y] == 0)
 				{
-					FieldArray[x, y] = 1;
-					rList.Add(new Rabbit(x,y));
+					PutRabbit(x, y, rList);
 					rabbits--;
 				}
 			}
@@ -53,8 +68,7 @@ namespace WolfIsland
 				int y = rand.Next(width);
 				if (FieldArray[x, y] == 0)
 				{
-					FieldArray[x, y] = 2;
-					wList.Add(new Wolf(x,y));
+					PutWolf(x, y, wList);
 					wolfs--;
 				}
 			}
