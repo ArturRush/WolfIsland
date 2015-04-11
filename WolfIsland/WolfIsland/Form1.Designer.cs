@@ -44,6 +44,7 @@
 			this.wAlive = new System.Windows.Forms.Label();
 			this.rAlive = new System.Windows.Forms.Label();
 			this.Step_Label = new System.Windows.Forms.Label();
+			this.DoLog = new System.Windows.Forms.CheckBox();
 			((System.ComponentModel.ISupportInitialize)(this.rNum)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.wNum)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.StepDuration)).BeginInit();
@@ -172,6 +173,7 @@
 			// 
 			// LogTBox
 			// 
+			this.LogTBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.LogTBox.Location = new System.Drawing.Point(607, 12);
 			this.LogTBox.Name = "LogTBox";
 			this.LogTBox.ReadOnly = true;
@@ -191,6 +193,7 @@
 			// 
 			// Pause_Button
 			// 
+			this.Pause_Button.BackColor = System.Drawing.Color.Gainsboro;
 			this.Pause_Button.Enabled = false;
 			this.Pause_Button.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Pause_Button.Location = new System.Drawing.Point(143, 379);
@@ -198,41 +201,52 @@
 			this.Pause_Button.Size = new System.Drawing.Size(32, 33);
 			this.Pause_Button.TabIndex = 12;
 			this.Pause_Button.Text = "II";
-			this.Pause_Button.UseVisualStyleBackColor = true;
+			this.Pause_Button.UseVisualStyleBackColor = false;
 			this.Pause_Button.Click += new System.EventHandler(this.Pause_Button_Click);
 			// 
 			// wAlive
 			// 
 			this.wAlive.AutoSize = true;
-			this.wAlive.Location = new System.Drawing.Point(12, 329);
+			this.wAlive.Location = new System.Drawing.Point(12, 314);
 			this.wAlive.Name = "wAlive";
-			this.wAlive.Size = new System.Drawing.Size(108, 13);
+			this.wAlive.Size = new System.Drawing.Size(117, 13);
 			this.wAlive.TabIndex = 13;
-			this.wAlive.Text = "Количество волков:";
+			this.wAlive.Text = "Количество волков: 0";
 			// 
 			// rAlive
 			// 
 			this.rAlive.AutoSize = true;
-			this.rAlive.Location = new System.Drawing.Point(12, 307);
+			this.rAlive.Location = new System.Drawing.Point(12, 292);
 			this.rAlive.Name = "rAlive";
-			this.rAlive.Size = new System.Drawing.Size(120, 13);
+			this.rAlive.Size = new System.Drawing.Size(129, 13);
 			this.rAlive.TabIndex = 14;
-			this.rAlive.Text = "Количество кроликов:";
+			this.rAlive.Text = "Количество кроликов: 0";
 			// 
 			// Step_Label
 			// 
 			this.Step_Label.AutoSize = true;
-			this.Step_Label.Location = new System.Drawing.Point(12, 352);
+			this.Step_Label.Location = new System.Drawing.Point(12, 337);
 			this.Step_Label.Name = "Step_Label";
-			this.Step_Label.Size = new System.Drawing.Size(96, 13);
+			this.Step_Label.Size = new System.Drawing.Size(94, 13);
 			this.Step_Label.TabIndex = 15;
-			this.Step_Label.Text = "Времени прошло:";
+			this.Step_Label.Text = "Сделано ходов: 0";
+			// 
+			// DoLog
+			// 
+			this.DoLog.AutoSize = true;
+			this.DoLog.Location = new System.Drawing.Point(15, 356);
+			this.DoLog.Name = "DoLog";
+			this.DoLog.Size = new System.Drawing.Size(76, 17);
+			this.DoLog.TabIndex = 16;
+			this.DoLog.Text = "Вести лог";
+			this.DoLog.UseVisualStyleBackColor = true;
 			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(814, 421);
+			this.Controls.Add(this.DoLog);
 			this.Controls.Add(this.Step_Label);
 			this.Controls.Add(this.rAlive);
 			this.Controls.Add(this.wAlive);
@@ -277,6 +291,7 @@
 		private System.Windows.Forms.Label wAlive;
 		private System.Windows.Forms.Label rAlive;
 		private System.Windows.Forms.Label Step_Label;
+		private System.Windows.Forms.CheckBox DoLog;
 	}
 }
 

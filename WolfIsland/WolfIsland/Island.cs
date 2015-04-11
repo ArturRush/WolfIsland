@@ -54,14 +54,37 @@ namespace WolfIsland
 			int index = wList.FindIndex((w) => w.x == x && w.y == y);
 			wList.RemoveAt(index);
 		}
-		public void FindFreeCell()
-		{
 
+		public int[] FindFreeCell(int x, int y)
+		{
+			for (int i = 0; i< GetNearbyCells(x,y).Count(); i++)
+			{
+				if (FieldArray[GetNearbyCells(x, y)[i][0], GetNearbyCells(x, y)[i][1]] == 0)
+					return new int[] { GetNearbyCells(x, y)[i][0], GetNearbyCells(x, y)[i][1] };
+			}
+			return new int[] { -1};
 		}
 
-		private void GetNearbyCells()
+		private List<int[]> GetNearbyCells(int x, int y)
 		{
-
+			List<int[]> CellsList = new List<int[]>();
+			if (x > 0 && y > 0)
+				CellsList.Add(new int[] { x - 1, y - 1 });
+			if (x > 0)
+				CellsList.Add(new int[] { x - 1, y });
+			if (x > 0 && y + 1 < width)
+				CellsList.Add(new int[] { x - 1, y + 1 });
+			if (y + 1 < width)
+				CellsList.Add(new int[] { x, y + 1 });
+			if (x + 1 < height && y + 1 < width)
+				CellsList.Add(new int[] { x + 1, y + 1 });
+			if (x + 1 < height)
+				CellsList.Add(new int[] { x + 1, y });
+			if (x + 1 < height && y > 0)
+				CellsList.Add(new int[] { x + 1, y - 1 });
+			if (y > 0)
+				CellsList.Add(new int[] { x, y - 1 });
+			return CellsList;
 		}
 
 		public void Clear()
@@ -71,6 +94,69 @@ namespace WolfIsland
 				{
 					FieldArray[i, j] = 0;
 				}
+		}
+
+		public void MoveAnimals()
+		{
+			Random rand = new Random();
+			foreach (Rabbit r in Form1.rList)
+			{
+				int Born = rand.Next(r.chance);
+				if (Born == 0)
+					r.BornRabbit();
+				int current = rand.Next(9);
+				switch (current)
+				{
+					case 1:
+						{
+							if (isFree(r.x - 1, r.y - 1))
+								r.NextStep(r.x - 1, r.y - 1);
+						}break;
+					case 2:
+						{
+							if (isFree(r.x - 1, r.y))
+								r.NextStep(r.x - 1, r.y);
+						} break;
+					case 3:
+						{
+							if (isFree(r.x - 1, r.y + 1))
+								r.NextStep(r.x - 1, r.y + 1);
+						} break;
+					case 4:
+						{
+							if (isFree(r.x, r.y + 1))
+								r.NextStep(r.x, r.y + 1);
+						} break;
+					case 5:
+						{
+							if (isFree(r.x + 1, r.y + 1))
+								r.NextStep(r.x + 1, r.y + 1);
+						} break;
+					case 6:
+						{
+							if (isFree(r.x + 1, r.y))
+								r.NextStep(r.x + 1, r.y);
+						} break;
+					case 7:
+						{
+							if (isFree(r.x + 1, r.y - 1))
+								r.NextStep(r.x + 1, r.y - 1);
+						} break;
+					case 8:
+						{
+							if (isFree(r.x, r.y - 1))
+								r.NextStep(r.x, r.y - 1);
+						} break;
+				}
+			}
+		}
+
+		public bool isFree(int x, int y)
+		{
+			if (x >= 0 && x < height && y >= 0 && y < width)
+				if (FieldArray[x, y] == 0)
+					return true;
+			return false;
 		}
 
 		public void  FillIsland(int rabbits, int wolfs, List<Rabbit> rList, List<Wolf> wList)

@@ -9,17 +9,34 @@ namespace WolfIsland
 	public class Wolf : Animal
 	{
 		private int health = 10;
-		public void EatRabbit()
+		public void EatRabbit(Rabbit r)
 		{
-			
+			this.health += 10;
+			r.KillRabbit();
 		}
 
-		public void ReduceHealth()
+		public void BornWolf()
+		{
+
+		}
+
+		public void ReduceHealth(int index)
 		{
 			if (this.health == 0)
-				KillAnimal();
+				this.KillWolf(index);
 			else
 				this.health--;
+		}
+
+		public void KillWolf()
+		{
+			int index = Form1.wList.FindIndex((w) => w.x==this.x && w.y == this.y);
+			Form1.wList.RemoveAt(index);
+		}
+
+		public void KillWolf(int index)
+		{
+			Form1.wList.RemoveAt(index);
 		}
 
 		public Wolf()

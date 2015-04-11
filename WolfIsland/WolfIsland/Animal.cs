@@ -11,25 +11,5 @@ namespace WolfIsland
 		public int chance;
 		public int x;
 		public int y;
-
-		public virtual void NewAnimal()
-		{
-
-		}
-
-		public virtual void KillAnimal()
-		{
-
-		}
-
-		public virtual void BornAnimal()
-		{
-
-		}
-
-		public virtual void NextStep()
-		{
-
-		}
 	}
 }

@@ -13,6 +13,22 @@ namespace WolfIsland
 			chance = 5;
 		}
 
+		public void BornRabbit()
+		{
+
+		}
+
+		public void KillRabbit()
+		{
+			int index = Form1.rList.FindIndex((r) => r.x == this.x && r.y == this.y);
+			Form1.rList.RemoveAt(index);
+		}
+
+		public void KillRabbit(int index)
+		{
+			Form1.rList.RemoveAt(index);
+		}
+
 		public Rabbit(int x, int y)
 		{
 			chance = 5;

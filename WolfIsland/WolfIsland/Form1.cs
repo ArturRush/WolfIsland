@@ -21,7 +21,7 @@ namespace WolfIsland
 
 		Island island = new Island();
 
-		private int StepNum;
+		private int StepNum = 0;
 		private bool action = false;
 		private bool pause = false;
 		public Form1()
@@ -83,17 +83,26 @@ namespace WolfIsland
 				rNum.Enabled = false;
 				wNum.Enabled = false;
 				island.FillIsland((int)rNum.Value, (int)wNum.Value, rList, wList);
+				if (DoLog.Checked)
+					LogTBox.Text = "Игра началась!\n";
 				upField.Start();
 			}else
 			{
 				action = false;
+				pause = false;
+				Pause_Button.BackColor = Color.Gainsboro;
 				Pause_Button.Enabled = false;
 				Start_Button.Text = "Старт!";
 				rNum.Enabled = true;
 				wNum.Enabled = true;
+				StepNum = 0;
+				LogTBox.Text = "";
 				island.Clear();
+				rList.Clear();
+				wList.Clear();
 				upField.Stop();
 				upField.Dispose();
+				UpdateGame();
 			}
 		}
 
@@ -102,10 +111,14 @@ namespace WolfIsland
 			if (pause)
 			{
 				pause = false;
+				Pause_Button.BackColor = Color.Gainsboro;
 				upField.Start();
 			}
 			else
+			{
 				pause = true;
+				Pause_Button.BackColor = Color.Yellow;
+			}
 		}
 
 		private void UpdateGame()
@@ -113,8 +126,12 @@ namespace WolfIsland
 			if (pause)
 				upField.Stop();
 			SetInfText();
+			StepNum++;
+			if (DoLog.Checked)
+				UpdateLog();
 			UpdatePanels();
 			upField.Interval = (int)StepDuration.Value;
+
 		}
 
 		private void UpdatePanels()
@@ -131,20 +148,20 @@ namespace WolfIsland
 				}
 		}
 
+		private void UpdateLog()
+		{
+			LogTBox.Text += "===========================" + "\n";
+			LogTBox.Text += "Шаг " + StepNum.ToString() + "\n";
+			LogTBox.Text += "Количество кроликов: " + rList.Count.ToString() + "\n";
+			LogTBox.Text += "Количество волков: " + wList.Count.ToString() + "\n";
+			LogTBox.Text += "Сделано ходов: " + StepNum.ToString() + "\n";
+		}
+
 		private void SetInfText()
 		{
-			if (InvokeRequired)
-			{
-				this.BeginInvoke(new Action<string>((s) => { rAlive.Text = "Количество кроликов: " + rList.Count.ToString(); }));
-				this.BeginInvoke(new Action<string>((s) => { wAlive.Text = "Количество волков: " + wList.Count.ToString(); }));
-				this.BeginInvoke(new Action<string>((s) => { Step_Label.Text = "Времени прошло: " + StepNum.ToString(); }));
-			}
-			else
-			{
 				rAlive.Text = "Количество кроликов: " + rList.Count.ToString();
 				wAlive.Text = "Количество волков: " + wList.Count.ToString();
-				Step_Label.Text = "Времени прошло: " + StepNum.ToString();
-			}
+				Step_Label.Text = "Сделано ходов: " + StepNum.ToString();
 		}
 	}
 }
