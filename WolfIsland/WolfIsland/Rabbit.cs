@@ -13,9 +13,12 @@ namespace WolfIsland
 			chance = 5;
 		}
 
-		public void BornRabbit()
+		public void BornRabbit(int[] freeCell)
 		{
-
+			if (freeCell[0] > -1)
+			{
+				Form1.rList.Add(new Rabbit(freeCell[0], freeCell[1]));
+			}
 		}
 
 		public void KillRabbit()
@@ -27,6 +30,12 @@ namespace WolfIsland
 		public void KillRabbit(int index)
 		{
 			Form1.rList.RemoveAt(index);
+		}
+
+		public void NextStep(int x, int y)
+		{
+			this.x = x;
+			this.y = y;
 		}
 
 		public Rabbit(int x, int y)

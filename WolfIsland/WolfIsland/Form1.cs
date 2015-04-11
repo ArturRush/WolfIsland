@@ -129,6 +129,7 @@ namespace WolfIsland
 			StepNum++;
 			if (DoLog.Checked)
 				UpdateLog();
+			island.UpdateField();
 			UpdatePanels();
 			upField.Interval = (int)StepDuration.Value;
 
