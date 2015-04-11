@@ -171,7 +171,7 @@ namespace WolfIsland
 				{
 					int rx = isRabbitsHere(Form1.wList[i].x, Form1.wList[i].y)[0];
 					int ry = isRabbitsHere(Form1.wList[i].x, Form1.wList[i].y)[1];
-					int index = Form1.rList.FindIndex((r) => Form1.rList[i].x == rx && Form1.rList[i].y == ry);
+					int index = Form1.rList.FindIndex((r) => r.x == rx && r.y == ry);
 					if (index >= 0)
 						Form1.wList[i].EatRabbit(index);
 				}

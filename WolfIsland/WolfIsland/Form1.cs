@@ -127,7 +127,7 @@ namespace WolfIsland
 				upField.Stop();
 			SetInfText();
 			StepNum++;
-			if (DoLog.Checked)
+			if (DoLog.Checked && action)
 				UpdateLog();
 			island.UpdateField();
 			UpdatePanels();

@@ -12,6 +12,8 @@ namespace WolfIsland
 		public void EatRabbit(int index)
 		{
 			this.health += 10;
+			this.x = Form1.rList[index].x;
+			this.y = Form1.rList[index].y;
 			Form1.rList[index].KillRabbit(index);
 		}
 
