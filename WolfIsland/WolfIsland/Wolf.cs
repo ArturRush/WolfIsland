@@ -1,56 +1,50 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WolfIsland
+﻿namespace WolfIsland
 {
 	public class Wolf
 	{
-		public static int chance = 20;
+		public static int Chance = 20;
 		private int health = 10;
-		public int x;
-		public int y;
+		public int X;
+		public int Y;
 		public void EatRabbit(int index)
 		{
-			this.health += 10;
-			this.x = Form1.rList[index].x;
-			this.y = Form1.rList[index].y;
-			Form1.rList[index].KillRabbit(index);
+			health += 10;
+			X = Form1.RList[index].X;
+			Y = Form1.RList[index].Y;
+			Form1.RList[index].KillRabbit(index);
 		}
 
 		public void BornWolf(int[] freeCell)
 		{
 			if(freeCell[0] >-1)
 			{
-				Form1.wList.Add(new Wolf(freeCell[0], freeCell[1]));
+				Form1.WList.Add(new Wolf(freeCell[0], freeCell[1]));
 			}
 		}
 
 		public void ReduceHealth()
 		{
-			if (this.health == 0)
-				this.KillWolf();
+			if (health == 0)
+				KillWolf();
 			else
-				this.health--;
+				health--;
 		}
 
 		public void KillWolf()
 		{
-			int index = Form1.wList.FindIndex((w) => w.x==this.x && w.y == this.y);
-			Form1.wList.RemoveAt(index);
+			int index = Form1.WList.FindIndex(w => w.X==X && w.Y == Y);
+			Form1.WList.RemoveAt(index);
 		}
 
 		public void KillWolf(int index)
 		{
-			Form1.wList.RemoveAt(index);
+			Form1.WList.RemoveAt(index);
 		}
 
 		public void NextStep(int x, int y)
 		{
-			this.x = x;
-			this.y = y;
+			X = x;
+			Y = y;
 		}
 
 		//public Wolf()
@@ -61,8 +55,8 @@ namespace WolfIsland
 		public Wolf(int x, int y)
 		{
 		//	chance = 20;
-			this.x = x;
-			this.y = y;
+			X = x;
+			Y = y;
 		}
 	}
 }

@@ -1,48 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WolfIsland
+﻿namespace WolfIsland
 {
 	public class Rabbit
 	{
-		public static int chance = 5;
-		public int x;
-		public int y;
-		//public Rabbit()
-		//{
-		//	chance = 5;
-		//}
+		public static int Chance = 5;
+		public int X;
+		public int Y;
 
 		public void BornRabbit(int[] freeCell)
 		{
-				Form1.rList.Add(new Rabbit(freeCell[0], freeCell[1]));
+				Form1.RList.Add(new Rabbit(freeCell[0], freeCell[1]));
 		}
 
 		public void KillRabbit()
 		{
-			int index = Form1.rList.FindIndex((r) => r.x == this.x && r.y == this.y);
-			Form1.rList.RemoveAt(index);
+			int index = Form1.RList.FindIndex(r => r.X == X && r.Y == Y);
+			Form1.RList.RemoveAt(index);
 		}
 
 		public void KillRabbit(int index)
 		{
-			Form1.rList.RemoveAt(index);
+			Form1.RList.RemoveAt(index);
 		}
 
 		public void NextStep(int x, int y)
 		{
-			this.x = x;
-			this.y = y;
+			X = x;
+			Y = y;
 		}
 
 		public Rabbit(int x, int y)
 		{
-		//	chance = 5;
-			this.x = x;
-			this.y = y;
+			X = x;
+			Y = y;
 		}
 	}
 }
