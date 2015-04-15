@@ -16,15 +16,18 @@ namespace WolfIsland
 
 		Island island = new Island();					//Экземпляр острова, с которым происходит все действие
 
-		private int stepNum;						//Номер шага
-		private bool action;			
-		private bool pause;
+		private int stepNum;			//Номер шага
+		private bool action;			//Запущена ли игра
+		private bool pause;				//Поставлена ли на паузу
 		public Form1()
 		{
 			InitializeComponent();
-			InitGame();
+			InitGame();			//Инициализация компонентов
 		}
 
+		/// <summary>
+		/// Создает массив панелей на поле, задает свойства таймера
+		/// </summary>
 		private void InitGame()
 		{
 			for(int i = 0; i<Island.Height; i++)
@@ -46,11 +49,21 @@ namespace WolfIsland
 			upField.Tick += upField_Tick;
 		}
 
+		/// <summary>
+		/// Тик таймера
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		void upField_Tick(object sender, EventArgs e)
 		{
 			UpdateGame();
 		}
 
+		/// <summary>
+		/// По клику мыши на панель создается волк или кролик в зависимости от условий
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		void panel_MouseClick(object sender, MouseEventArgs e)
 		{
 			if(rPut.Checked)
@@ -68,6 +81,11 @@ namespace WolfIsland
 			UpdatePanels();
 		}
 
+		/// <summary>
+		/// Запускает или останавливает игру
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Start_Button_Click(object sender, EventArgs e)
 		{
 			if (!action)
@@ -102,6 +120,11 @@ namespace WolfIsland
 			}
 		}
 
+		/// <summary>
+		/// Включает/выключает паузу
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Pause_Button_Click(object sender, EventArgs e)
 		{
 			if (pause)
@@ -117,6 +140,9 @@ namespace WolfIsland
 			}
 		}
 
+		/// <summary>
+		///	Совершает следующий игровой шаг
+		/// </summary>
 		private void UpdateGame()
 		{
 			if (pause)
@@ -131,6 +157,9 @@ namespace WolfIsland
 
 		}
 
+		/// <summary>
+		/// Обновляет позиции животных на поле
+		/// </summary>
 		private void UpdatePanels()
 		{
 			for (int i = 0; i < Island.Height; i++)
@@ -145,6 +174,9 @@ namespace WolfIsland
 				}
 		}
 
+		/// <summary>
+		/// Обновляет лог игры
+		/// </summary>
 		private void UpdateLog()
 		{
 			LogTBox.Text += @"===========================" + @"
@@ -159,6 +191,9 @@ namespace WolfIsland
 ";
 		}
 
+		/// <summary>
+		/// Обновляет игровую информацию
+		/// </summary>
 		private void SetInfText()
 		{
 				rAlive.Text = @"Количество кроликов: " + RList.Count.ToString();
