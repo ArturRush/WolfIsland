@@ -59,10 +59,11 @@ namespace WolfIsland
 		{
 			for (int i = 0; i < GetNearbyCells(x, y).Count(); i++)
 			{
-				if (FieldArray[GetNearbyCells(x, y)[i][0], GetNearbyCells(x, y)[i][1]] == 0)
-					return GetNearbyCells(x, y)[i];
+				int[] freePos = GetNearbyCells(x, y)[i];
+				if (FieldArray[freePos[0], freePos[1]] == 0)
+					return freePos;
 			}
-			return new int[] { -1 };
+			return new int[] { -1 , -1};
 		}
 
 		private List<int[]> GetNearbyCells(int x, int y)
@@ -87,7 +88,7 @@ namespace WolfIsland
 			return CellsList;
 		}
 
-		public void Clear()
+		public void ClearField()
 		{
 			for (int i = 0; i < height; i++)
 				for (int j = 0; j < width; j++)
@@ -98,8 +99,7 @@ namespace WolfIsland
 
 		public void UpdateField()
 		{
-			MoveAnimals();
-			Clear();
+			ClearField();
 			foreach (Rabbit r in Form1.rList)
 				FieldArray[r.x,r.y] = 1;
 			foreach (Wolf w in Form1.wList)
@@ -111,9 +111,16 @@ namespace WolfIsland
 			Random rand = new Random();
 			for (int i = 0; i < Form1.rList.Count; i++)
 			{
-				int Born = rand.Next(Form1.rList[i].chance);
+				int Born = rand.Next(Rabbit.chance);
 				if (Born == 0)
-					Form1.rList[i].BornRabbit(FindFreeCell(Form1.rList[i].x, Form1.rList[i].y));
+				{
+					int[] freePos = FindFreeCell(Form1.rList[i].x, Form1.rList[i].y);
+					if (freePos[0] > -1 && freePos[1] > -1)
+					{
+						Form1.rList[i].BornRabbit(freePos);
+						FieldArray[freePos[0], freePos[1]] = 1;
+					}
+				}
 				int current = rand.Next(9);
 				switch (current)
 				{
@@ -159,21 +166,22 @@ namespace WolfIsland
 						} break;
 				}
 			}
+			UpdateField();
 			for (int i = 0; i < Form1.wList.Count; i++ )
 			{
 				Form1.wList[i].ReduceHealth();
 				if (i >= Form1.wList.Count)
 					break;
-				int Born = rand.Next(Form1.wList[i].chance);
+				int Born = rand.Next(Wolf.chance);
 				if (Born == 0)
 					Form1.wList[i].BornWolf(FindFreeCell(Form1.wList[i].x, Form1.wList[i].y));
-				if (isRabbitsHere(Form1.wList[i].x, Form1.wList[i].y)[0] > -1)
+				int[] pos = isRabbitsHere(Form1.wList[i].x, Form1.wList[i].y);
+				if (pos[0] > -1 && pos[1] > -1)
 				{
-					int rx = isRabbitsHere(Form1.wList[i].x, Form1.wList[i].y)[0];
-					int ry = isRabbitsHere(Form1.wList[i].x, Form1.wList[i].y)[1];
-					int index = Form1.rList.FindIndex((r) => r.x == rx && r.y == ry);
-					if (index >= 0)
-						Form1.wList[i].EatRabbit(index);
+					int index = Form1.rList.FindIndex((r) => r.x == pos[0] && r.y == pos[1]);
+					FieldArray[pos[0],pos[1]] = 2;	
+					Form1.wList[i].EatRabbit(index);
+						
 				}
 				else
 				{
@@ -223,6 +231,7 @@ namespace WolfIsland
 					}
 				}
 			}
+			UpdateField();
 		}
 
 		public int[] isRabbitsHere(int x, int y)
@@ -233,7 +242,7 @@ namespace WolfIsland
 				if (FieldArray[NearCells[i][0], NearCells[i][1]] == 1)
 					return NearCells[i];
 			}
-			return new int[] { -1 };
+			return new int[] { -1 , -1};
 		}
 
 		public bool isFree(int x, int y)

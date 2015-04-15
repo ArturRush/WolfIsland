@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace WolfIsland
 {
-	public class Rabbit : Animal
+	public class Rabbit
 	{
-		public Rabbit()
-		{
-			chance = 5;
-		}
+		public static int chance = 5;
+		public int x;
+		public int y;
+		//public Rabbit()
+		//{
+		//	chance = 5;
+		//}
 
 		public void BornRabbit(int[] freeCell)
 		{
-			if (freeCell[0] > -1)
-			{
 				Form1.rList.Add(new Rabbit(freeCell[0], freeCell[1]));
-			}
 		}
 
 		public void KillRabbit()
@@ -40,7 +40,7 @@ namespace WolfIsland
 
 		public Rabbit(int x, int y)
 		{
-			chance = 5;
+		//	chance = 5;
 			this.x = x;
 			this.y = y;
 		}

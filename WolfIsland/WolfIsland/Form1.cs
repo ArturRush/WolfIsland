@@ -97,7 +97,7 @@ namespace WolfIsland
 				wNum.Enabled = true;
 				StepNum = 0;
 				LogTBox.Text = "";
-				island.Clear();
+				island.ClearField();
 				rList.Clear();
 				wList.Clear();
 				upField.Stop();
@@ -129,7 +129,7 @@ namespace WolfIsland
 			StepNum++;
 			if (DoLog.Checked && action)
 				UpdateLog();
-			island.UpdateField();
+			island.MoveAnimals();
 			UpdatePanels();
 			upField.Interval = (int)StepDuration.Value;
 
