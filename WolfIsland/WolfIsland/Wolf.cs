@@ -1,11 +1,26 @@
 ﻿namespace WolfIsland
 {
+	/// <summary>
+	/// Класс отвечающий за действия волков
+	/// </summary>
 	public class Wolf
 	{
-		public static int Chance = 20;		//Величина, обратная шансу размножения
-		private int health = 10;		//Начальное здоровье волка
-		public int X;			//Позиция по вертикали
-		public int Y;			//Позиция по горизонтали
+		/// <summary>
+		/// Величина, обратная шансу размножения
+		/// </summary>
+		public static int Chance = 20;
+		/// <summary>
+		/// Позиция по вертикали
+		/// </summary>
+		public int X;
+		/// <summary>
+		/// Позиция по горизонтали
+		/// </summary>
+		public int Y;
+		/// <summary>
+		/// Начальное здоровье волка
+		/// </summary>
+		public int health = 10;
 		/// <summary>
 		/// Поедание кролика с указанным индексом
 		/// </summary>
@@ -13,9 +28,9 @@
 		public void EatRabbit(int index)
 		{
 			health += 10;
-			X = Form1.RList[index].X;
-			Y = Form1.RList[index].Y;
-			Form1.RList[index].KillRabbit(index);
+			X = MainWindow.RList[index].X;
+			Y = MainWindow.RList[index].Y;
+			MainWindow.RList[index].KillRabbit(index);
 		}
 		/// <summary>
 		/// Рождение волка в указанной позиции
@@ -25,7 +40,7 @@
 		{
 			if(freeCell[0] >-1)
 			{
-				Form1.WList.Add(new Wolf(freeCell[0], freeCell[1]));
+				MainWindow.WList.Add(new Wolf(freeCell[0], freeCell[1]));
 			}
 		}
 		/// <summary>
@@ -33,18 +48,17 @@
 		/// </summary>
 		public void ReduceHealth()
 		{
+			health--;
 			if (health == 0)
 				KillWolf();
-			else
-				health--;
 		}
 		/// <summary>
 		/// Убивает данного волка
 		/// </summary>
 		public void KillWolf()
 		{
-			int index = Form1.WList.FindIndex(w => w.X==X && w.Y == Y);
-			Form1.WList.RemoveAt(index);
+			int index = MainWindow.WList.FindIndex(w => w.X==X && w.Y == Y);
+			MainWindow.WList.RemoveAt(index);
 		}
 		/// <summary>
 		/// Убивает волка с указанным в списке индексом
@@ -52,7 +66,7 @@
 		/// <param name="index">Индекс</param>
 		public void KillWolf(int index)
 		{
-			Form1.WList.RemoveAt(index);
+			MainWindow.WList.RemoveAt(index);
 		}
 		/// <summary>
 		/// Перемещает волка на новые координаты

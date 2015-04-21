@@ -4,12 +4,24 @@ using System.Linq;
 
 namespace WolfIsland
 {
+	/// <summary>
+	/// Класс, отвечающий за внутриигровые действия
+	/// </summary>
 	public class Island
 	{
-		public static int Height = 20;					//Высота игрового поля
-		public static int Width = 20;					//Ширина игрового поля
 
-		public int[,] FieldArray = new int[Height, Width];			//Массив игрового поля
+		/// <summary>
+		/// Высота игрового поля
+		/// </summary>
+		public static int Height = 20;
+		/// <summary>
+		/// Ширина игрового поля
+		/// </summary>
+		public static int Width = 20;
+		/// <summary>
+		/// Массив игрового поля
+		/// </summary>
+		public int[,] FieldArray = new int[Height, Width];
 
 		/// <summary>
 		/// Устанавливает в заданную клетку кролика
@@ -17,11 +29,11 @@ namespace WolfIsland
 		/// <param name="x">Позиция по вертикали</param>
 		/// <param name="y">Позиция по горизонтали</param>
 		/// <param name="rList">Список кроликов, в который добавляется новый</param>
-		public void PutRabbit(int x, int y, List<Rabbit> rList)		
+		public void PutRabbit(int x, int y, List<Rabbit> rList)
 		{
 			if (FieldArray[x, y] == 2)
 			{
-				DeleteWolf(x, y, Form1.WList);
+				DeleteWolf(x, y, MainWindow.WList);
 				FieldArray[x, y] = 1;
 				rList.Add(new Rabbit(x, y));
 			}
@@ -42,7 +54,7 @@ namespace WolfIsland
 		{
 			if (FieldArray[x, y] == 1)
 			{
-				DeleteRabbit(x, y, Form1.RList);
+				DeleteRabbit(x, y, MainWindow.RList);
 				FieldArray[x, y] = 2;
 				wList.Add(new Wolf(x, y));
 			}
@@ -91,7 +103,7 @@ namespace WolfIsland
 				if (FieldArray[freePos[0], freePos[1]] == 0)
 					return freePos;
 			}
-			return new[] { -1 , -1};
+			return new[] { -1, -1 };
 		}
 
 		/// <summary>
@@ -140,9 +152,9 @@ namespace WolfIsland
 		public void UpdateField()
 		{
 			ClearField();
-			foreach (Rabbit r in Form1.RList)
-				FieldArray[r.X,r.Y] = 1;
-			foreach (Wolf w in Form1.WList)
+			foreach (Rabbit r in MainWindow.RList)
+				FieldArray[r.X, r.Y] = 1;
+			foreach (Wolf w in MainWindow.WList)
 				FieldArray[w.X, w.Y] = 2;
 		}
 
@@ -152,15 +164,15 @@ namespace WolfIsland
 		public void MoveAnimals()
 		{
 			Random rand = new Random();
-			for (int i = 0; i < Form1.RList.Count; i++)
+			for (int i = 0; i < MainWindow.RList.Count; i++)
 			{
 				int born = rand.Next(Rabbit.Chance);
 				if (born == 0)
 				{
-					int[] freePos = FindFreeCell(Form1.RList[i].X, Form1.RList[i].Y);
+					int[] freePos = FindFreeCell(MainWindow.RList[i].X, MainWindow.RList[i].Y);
 					if (freePos[0] > -1 && freePos[1] > -1)
 					{
-						Form1.RList[i].BornRabbit(freePos);
+						MainWindow.RList[i].BornRabbit(freePos);
 						FieldArray[freePos[0], freePos[1]] = 1;
 					}
 				}
@@ -169,62 +181,96 @@ namespace WolfIsland
 				{
 					case 1:
 						{
-							if (IsFree(Form1.RList[i].X - 1, Form1.RList[i].Y - 1))
-								Form1.RList[i].NextStep(Form1.RList[i].X - 1, Form1.RList[i].Y - 1);
+							if (IsFree(MainWindow.RList[i].X - 1, MainWindow.RList[i].Y - 1))
+							{
+								FieldArray[MainWindow.RList[i].X, MainWindow.RList[i].Y] = 0;
+								MainWindow.RList[i].NextStep(MainWindow.RList[i].X - 1, MainWindow.RList[i].Y - 1);
+								FieldArray[MainWindow.RList[i].X, MainWindow.RList[i].Y] = 1;
+							}
 						} break;
 					case 2:
 						{
-							if (IsFree(Form1.RList[i].X - 1, Form1.RList[i].Y))
-								Form1.RList[i].NextStep(Form1.RList[i].X - 1, Form1.RList[i].Y);
+							if (IsFree(MainWindow.RList[i].X - 1, MainWindow.RList[i].Y))
+							{
+								FieldArray[MainWindow.RList[i].X, MainWindow.RList[i].Y] = 0;
+								MainWindow.RList[i].NextStep(MainWindow.RList[i].X - 1, MainWindow.RList[i].Y);
+								FieldArray[MainWindow.RList[i].X, MainWindow.RList[i].Y] = 1;
+							}
 						} break;
 					case 3:
 						{
-							if (IsFree(Form1.RList[i].X - 1, Form1.RList[i].Y + 1))
-								Form1.RList[i].NextStep(Form1.RList[i].X - 1, Form1.RList[i].Y + 1);
+							if (IsFree(MainWindow.RList[i].X - 1, MainWindow.RList[i].Y + 1))
+							{
+								FieldArray[MainWindow.RList[i].X, MainWindow.RList[i].Y] = 0;
+								MainWindow.RList[i].NextStep(MainWindow.RList[i].X - 1, MainWindow.RList[i].Y + 1);
+								FieldArray[MainWindow.RList[i].X, MainWindow.RList[i].Y] = 1;
+							}
 						} break;
 					case 4:
 						{
-							if (IsFree(Form1.RList[i].X, Form1.RList[i].Y + 1))
-								Form1.RList[i].NextStep(Form1.RList[i].X, Form1.RList[i].Y + 1);
+							if (IsFree(MainWindow.RList[i].X, MainWindow.RList[i].Y + 1))
+							{
+								FieldArray[MainWindow.RList[i].X, MainWindow.RList[i].Y] = 0;
+								MainWindow.RList[i].NextStep(MainWindow.RList[i].X, MainWindow.RList[i].Y + 1);
+								FieldArray[MainWindow.RList[i].X, MainWindow.RList[i].Y] = 1;
+							}
 						} break;
 					case 5:
 						{
-							if (IsFree(Form1.RList[i].X + 1, Form1.RList[i].Y + 1))
-								Form1.RList[i].NextStep(Form1.RList[i].X + 1, Form1.RList[i].Y + 1);
+							if (IsFree(MainWindow.RList[i].X + 1, MainWindow.RList[i].Y + 1))
+							{
+								FieldArray[MainWindow.RList[i].X, MainWindow.RList[i].Y] = 0;
+								MainWindow.RList[i].NextStep(MainWindow.RList[i].X + 1, MainWindow.RList[i].Y + 1);
+								FieldArray[MainWindow.RList[i].X, MainWindow.RList[i].Y] = 1;
+							}
 						} break;
 					case 6:
 						{
-							if (IsFree(Form1.RList[i].X + 1, Form1.RList[i].Y))
-								Form1.RList[i].NextStep(Form1.RList[i].X + 1, Form1.RList[i].Y);
+							if (IsFree(MainWindow.RList[i].X + 1, MainWindow.RList[i].Y))
+							{
+								FieldArray[MainWindow.RList[i].X, MainWindow.RList[i].Y] = 0;
+								MainWindow.RList[i].NextStep(MainWindow.RList[i].X + 1, MainWindow.RList[i].Y);
+								FieldArray[MainWindow.RList[i].X, MainWindow.RList[i].Y] = 1;
+							}
 						} break;
 					case 7:
 						{
-							if (IsFree(Form1.RList[i].X + 1, Form1.RList[i].Y - 1))
-								Form1.RList[i].NextStep(Form1.RList[i].X + 1, Form1.RList[i].Y - 1);
+							if (IsFree(MainWindow.RList[i].X + 1, MainWindow.RList[i].Y - 1))
+							{
+								FieldArray[MainWindow.RList[i].X, MainWindow.RList[i].Y] = 0;
+								MainWindow.RList[i].NextStep(MainWindow.RList[i].X + 1, MainWindow.RList[i].Y - 1);
+								FieldArray[MainWindow.RList[i].X, MainWindow.RList[i].Y] = 1;
+							}
 						} break;
 					case 8:
 						{
-							if (IsFree(Form1.RList[i].X, Form1.RList[i].Y - 1))
-								Form1.RList[i].NextStep(Form1.RList[i].X, Form1.RList[i].Y - 1);
+							if (IsFree(MainWindow.RList[i].X, MainWindow.RList[i].Y - 1))
+							{
+								FieldArray[MainWindow.RList[i].X, MainWindow.RList[i].Y] = 0;
+								MainWindow.RList[i].NextStep(MainWindow.RList[i].X, MainWindow.RList[i].Y - 1);
+								FieldArray[MainWindow.RList[i].X, MainWindow.RList[i].Y] = 1;
+							}
 						} break;
 				}
 			}
 			UpdateField();
-			for (int i = 0; i < Form1.WList.Count; i++ )
+			for (int i = 0; i < MainWindow.WList.Count; i++)
 			{
-				Form1.WList[i].ReduceHealth();
-				if (i >= Form1.WList.Count)
+				if (MainWindow.WList[i].health == 1)
+					FieldArray[MainWindow.WList[i].X, MainWindow.WList[i].Y] = 0;
+				MainWindow.WList[i].ReduceHealth();
+				if (i >= MainWindow.WList.Count)
 					break;
 				int born = rand.Next(Wolf.Chance);
 				if (born == 0)
-					Form1.WList[i].BornWolf(FindFreeCell(Form1.WList[i].X, Form1.WList[i].Y));
-				int[] pos = IsRabbitsHere(Form1.WList[i].X, Form1.WList[i].Y);
+					MainWindow.WList[i].BornWolf(FindFreeCell(MainWindow.WList[i].X, MainWindow.WList[i].Y));
+				int[] pos = IsRabbitsHere(MainWindow.WList[i].X, MainWindow.WList[i].Y);
 				if (pos[0] > -1 && pos[1] > -1)
 				{
-					int index = Form1.RList.FindIndex(r => r.X == pos[0] && r.Y == pos[1]);
-					FieldArray[pos[0],pos[1]] = 2;	
-					Form1.WList[i].EatRabbit(index);
-						
+					int index = MainWindow.RList.FindIndex(r => r.X == pos[0] && r.Y == pos[1]);
+					FieldArray[pos[0], pos[1]] = 2;
+					MainWindow.WList[i].EatRabbit(index);
+
 				}
 				else
 				{
@@ -233,43 +279,75 @@ namespace WolfIsland
 					{
 						case 1:
 							{
-								if (IsFree(Form1.WList[i].X - 1, Form1.WList[i].Y - 1))
-									Form1.WList[i].NextStep(Form1.WList[i].X - 1, Form1.WList[i].Y - 1);
+								if (IsFree(MainWindow.WList[i].X - 1, MainWindow.WList[i].Y - 1))
+								{
+									FieldArray[MainWindow.WList[i].X, MainWindow.WList[i].Y] = 0;
+									MainWindow.WList[i].NextStep(MainWindow.WList[i].X - 1, MainWindow.WList[i].Y - 1);
+									FieldArray[MainWindow.WList[i].X, MainWindow.WList[i].Y] = 2;
+								}
 							} break;
 						case 2:
 							{
-								if (IsFree(Form1.WList[i].X - 1, Form1.WList[i].Y))
-									Form1.WList[i].NextStep(Form1.WList[i].X - 1, Form1.WList[i].Y);
+								if (IsFree(MainWindow.WList[i].X - 1, MainWindow.WList[i].Y))
+									{
+									FieldArray[MainWindow.WList[i].X, MainWindow.WList[i].Y] = 0;
+									MainWindow.WList[i].NextStep(MainWindow.WList[i].X - 1, MainWindow.WList[i].Y);
+									FieldArray[MainWindow.WList[i].X, MainWindow.WList[i].Y] = 2;
+								}
 							} break;
 						case 3:
 							{
-								if (IsFree(Form1.WList[i].X - 1, Form1.WList[i].Y + 1))
-									Form1.WList[i].NextStep(Form1.WList[i].X - 1, Form1.WList[i].Y + 1);
+								if (IsFree(MainWindow.WList[i].X - 1, MainWindow.WList[i].Y + 1))
+									{
+									FieldArray[MainWindow.WList[i].X, MainWindow.WList[i].Y] = 0;
+									MainWindow.WList[i].NextStep(MainWindow.WList[i].X - 1, MainWindow.WList[i].Y + 1);
+									FieldArray[MainWindow.WList[i].X, MainWindow.WList[i].Y] = 2;
+								}
 							} break;
 						case 4:
 							{
-								if (IsFree(Form1.WList[i].X, Form1.WList[i].Y + 1))
-									Form1.WList[i].NextStep(Form1.WList[i].X, Form1.WList[i].Y + 1);
+								if (IsFree(MainWindow.WList[i].X, MainWindow.WList[i].Y + 1))
+									{
+									FieldArray[MainWindow.WList[i].X, MainWindow.WList[i].Y] = 0;
+									MainWindow.WList[i].NextStep(MainWindow.WList[i].X, MainWindow.WList[i].Y + 1);
+									FieldArray[MainWindow.WList[i].X, MainWindow.WList[i].Y] = 2;
+								}
 							} break;
 						case 5:
 							{
-								if (IsFree(Form1.WList[i].X + 1, Form1.WList[i].Y + 1))
-									Form1.WList[i].NextStep(Form1.WList[i].X + 1, Form1.WList[i].Y + 1);
+								if (IsFree(MainWindow.WList[i].X + 1, MainWindow.WList[i].Y + 1))
+									{
+									FieldArray[MainWindow.WList[i].X, MainWindow.WList[i].Y] = 0;
+									MainWindow.WList[i].NextStep(MainWindow.WList[i].X + 1, MainWindow.WList[i].Y + 1);
+									FieldArray[MainWindow.WList[i].X, MainWindow.WList[i].Y] = 2;
+								}
 							} break;
 						case 6:
 							{
-								if (IsFree(Form1.WList[i].X + 1, Form1.WList[i].Y))
-									Form1.WList[i].NextStep(Form1.WList[i].X + 1, Form1.WList[i].Y);
+								if (IsFree(MainWindow.WList[i].X + 1, MainWindow.WList[i].Y))
+									{
+									FieldArray[MainWindow.WList[i].X, MainWindow.WList[i].Y] = 0;
+									MainWindow.WList[i].NextStep(MainWindow.WList[i].X + 1, MainWindow.WList[i].Y);
+									FieldArray[MainWindow.WList[i].X, MainWindow.WList[i].Y] = 2;
+								}
 							} break;
 						case 7:
 							{
-								if (IsFree(Form1.WList[i].X + 1, Form1.WList[i].Y - 1))
-									Form1.WList[i].NextStep(Form1.WList[i].X + 1, Form1.WList[i].Y - 1);
+								if (IsFree(MainWindow.WList[i].X + 1, MainWindow.WList[i].Y - 1))
+									{
+									FieldArray[MainWindow.WList[i].X, MainWindow.WList[i].Y] = 0;
+									MainWindow.WList[i].NextStep(MainWindow.WList[i].X + 1, MainWindow.WList[i].Y - 1);
+									FieldArray[MainWindow.WList[i].X, MainWindow.WList[i].Y] = 2;
+								}
 							} break;
 						case 8:
 							{
-								if (IsFree(Form1.WList[i].X, Form1.WList[i].Y - 1))
-									Form1.WList[i].NextStep(Form1.WList[i].X, Form1.WList[i].Y - 1);
+								if (IsFree(MainWindow.WList[i].X, MainWindow.WList[i].Y - 1))
+									{
+									FieldArray[MainWindow.WList[i].X, MainWindow.WList[i].Y] = 0;
+									MainWindow.WList[i].NextStep(MainWindow.WList[i].X, MainWindow.WList[i].Y - 1);
+									FieldArray[MainWindow.WList[i].X, MainWindow.WList[i].Y] = 2;
+									}
 							} break;
 					}
 				}
@@ -290,7 +368,7 @@ namespace WolfIsland
 				if (FieldArray[nearCells[i][0], nearCells[i][1]] == 1)
 					return nearCells[i];
 			}
-			return new[] { -1 , -1};
+			return new[] { -1, -1 };
 		}
 		/// <summary>
 		/// Проверяет, свободна ли указанная клетка

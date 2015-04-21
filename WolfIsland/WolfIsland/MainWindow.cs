@@ -5,24 +5,42 @@ using System.Windows.Forms;
 
 namespace WolfIsland
 {
-	public partial class Form1 : Form
+	/// <summary>
+	/// Класс, отвечающий за работу пользовательского интерфейса
+	/// </summary>
+	public partial class MainWindow : Form
 	{
-		public static List<Rabbit> RList = new List<Rabbit>();		//Хранит список кроликов
-		public static List<Wolf> WList = new List<Wolf>();			//Хранит список волков
-
-		Timer upField = new Timer();								//Поток для обновления и работы поля
-
-		Panel[,] panels = new Panel[Island.Height, Island.Width];	//Хранит массив панелей для отображения движения животных
-
-		Island island = new Island();					//Экземпляр острова, с которым происходит все действие
+		/// <summary>
+		/// Хранит список кроликов
+		/// </summary>
+		public static List<Rabbit> RList = new List<Rabbit>();
+		/// <summary>
+		/// Хранит список волков
+		/// </summary>
+		public static List<Wolf> WList = new List<Wolf>();
+		/// <summary>
+		/// Поток для обновления и работы поля
+		/// </summary>
+		Timer upField = new Timer();								
+		/// <summary>
+		/// Хранит массив панелей для отображения движения животных
+		/// </summary>
+		Panel[,] panels = new Panel[Island.Height, Island.Width];
+		/// <summary>
+		/// Экземпляр острова, с которым происходит все действие
+		/// </summary>
+		Island island = new Island();					
 
 		private int stepNum;			//Номер шага
 		private bool action;			//Запущена ли игра
 		private bool pause;				//Поставлена ли на паузу
-		public Form1()
+		/// <summary>
+		/// Инициализирует игру и компоненты
+		/// </summary>
+		public MainWindow()
 		{
 			InitializeComponent();
-			InitGame();			//Инициализация компонентов
+			InitGame();		
 		}
 
 		/// <summary>

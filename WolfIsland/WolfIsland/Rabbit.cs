@@ -1,25 +1,37 @@
 ﻿namespace WolfIsland
 {
+	/// <summary>
+	/// Класс, отвечающий за действия кроликов
+	/// </summary>
 	public class Rabbit
 	{
-		public static int Chance = 5;		//Величина, обратная шансу размножения
-		public int X;			//Позиция по вертикали
-		public int Y;			//Позиция по горизонтали
+		/// <summary>
+		/// Величина, обратная шансу размножения
+		/// </summary>
+		public static int Chance = 5;		
+		/// <summary>
+		/// Позиция по вертикали
+		/// </summary>
+		public int X;			
+		/// <summary>
+		/// Позиция по горизонтали
+		/// </summary>
+		public int Y;			
 		/// <summary>
 		/// Рождение кролика в указанной позиции
 		/// </summary>
 		/// <param name="freeCell">Массив с координатами позиции</param>
 		public void BornRabbit(int[] freeCell)
 		{
-				Form1.RList.Add(new Rabbit(freeCell[0], freeCell[1]));
+				MainWindow.RList.Add(new Rabbit(freeCell[0], freeCell[1]));
 		}
 		/// <summary>
 		/// Убивает данного кролика
 		/// </summary>
 		public void KillRabbit()
 		{
-			int index = Form1.RList.FindIndex(r => r.X == X && r.Y == Y);
-			Form1.RList.RemoveAt(index);
+			int index = MainWindow.RList.FindIndex(r => r.X == X && r.Y == Y);
+			MainWindow.RList.RemoveAt(index);
 		}
 		/// <summary>
 		/// Убивает кролика с указанным в списке индексом
@@ -27,7 +39,7 @@
 		/// <param name="index">Индекс</param>
 		public void KillRabbit(int index)
 		{
-			Form1.RList.RemoveAt(index);
+			MainWindow.RList.RemoveAt(index);
 		}
 		/// <summary>
 		/// Перемещает кролика на новые координаты
